@@ -568,7 +568,7 @@ public class KafkaConsumer<K, V> implements Consumer<K, V> {
      * @param properties The consumer configuration properties
      */
     public KafkaConsumer(Properties properties) {
-        this(properties, null, null);
+        this(propsToMap(properties), null, null);
     }
 
     /**

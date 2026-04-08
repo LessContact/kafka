@@ -325,7 +325,7 @@ public class KafkaProducer<K, V> implements Producer<K, V> {
      * @param properties   The producer configs
      */
     public KafkaProducer(Properties properties) {
-        this(properties, null, null);
+        this(Utils.propsToMap(properties), null, null);
     }
 
     /**
