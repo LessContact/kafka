@@ -37,7 +37,8 @@ public abstract class AdminClient implements Admin {
      * @return The new KafkaAdminClient.
      */
     public static AdminClient create(Properties props) {
-        return KafkaAdminClient.createInternal(new AdminClientConfig(props, true), null, null);
+        KafkaAdminClient.TimeoutProcessorFactory timeoutProcessorFactory = null;
+        return KafkaAdminClient.createInternal(new AdminClientConfig(props, true), timeoutProcessorFactory, null);
     }
 
     /**
@@ -47,7 +48,8 @@ public abstract class AdminClient implements Admin {
      * @return The new KafkaAdminClient.
      */
     public static AdminClient create(Map<String, Object> conf) {
-        return KafkaAdminClient.createInternal(new AdminClientConfig(conf, true), null, null);
+        KafkaAdminClient.TimeoutProcessorFactory timeoutProcessorFactory = null;
+        return KafkaAdminClient.createInternal(new AdminClientConfig(conf, true), timeoutProcessorFactory, null);
     }
 
     @Override
