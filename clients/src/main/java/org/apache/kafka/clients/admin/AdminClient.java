@@ -17,6 +17,7 @@
 
 package org.apache.kafka.clients.admin;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
 
@@ -36,7 +37,7 @@ public abstract class AdminClient implements Admin {
      * @return The new KafkaAdminClient.
      */
     public static AdminClient create(Properties props) {
-        return (AdminClient) Admin.create(props);
+        return KafkaAdminClient.createInternal(new AdminClientConfig(props, true), null);
     }
 
     /**
@@ -46,6 +47,16 @@ public abstract class AdminClient implements Admin {
      * @return The new KafkaAdminClient.
      */
     public static AdminClient create(Map<String, Object> conf) {
-        return (AdminClient) Admin.create(conf);
+        return KafkaAdminClient.createInternal(new AdminClientConfig(conf, true), null, null);
+    }
+
+    @Override
+    public CreateTopicsResult createTopics(Collection<NewTopic> newTopics) {
+        return Admin.super.createTopics(newTopics);
+    }
+
+    @Override
+    public void close() {
+        Admin.super.close();
     }
 }
