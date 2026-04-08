@@ -25,7 +25,7 @@ import org.apache.kafka.common.metrics.Metrics;
 import org.apache.kafka.common.metrics.Sensor;
 import org.apache.kafka.common.network.ChannelBuilder;
 import org.apache.kafka.common.network.ChannelBuilders;
-import org.apache.kafka.common.network.Selector;
+import org.apache.kafka.common.network.NettySelector;
 import org.apache.kafka.common.security.JaasContext;
 import org.apache.kafka.common.security.auth.SecurityProtocol;
 import org.apache.kafka.common.telemetry.internals.ClientTelemetrySender;
@@ -191,11 +191,11 @@ public final class ClientUtils {
                                                     Sensor throttleTimeSensor,
                                                     ClientTelemetrySender clientTelemetrySender) {
         ChannelBuilder channelBuilder = null;
-        Selector selector = null;
+        NettySelector selector = null;
 
         try {
             channelBuilder = ClientUtils.createChannelBuilder(config, time, logContext);
-            selector = new Selector(config.getLong(CommonClientConfigs.CONNECTIONS_MAX_IDLE_MS_CONFIG),
+            selector = new NettySelector(config.getLong(CommonClientConfigs.CONNECTIONS_MAX_IDLE_MS_CONFIG),
                     metrics,
                     time,
                     metricsGroupPrefix,

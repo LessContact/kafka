@@ -1878,12 +1878,14 @@ project(':clients') {
     implementation libs.opentelemetryProto
     implementation libs.protobuf
     implementation libs.slf4jApi
+    implementation libs.nettyAll
 
     // libraries which should be added as runtime dependencies in generated pom.xml should be defined here:
     shadowed libs.zstd
     shadowed libs.lz4
     shadowed libs.snappy
     shadowed libs.slf4jApi
+    shadowed libs.nettyAll
 
     compileOnly libs.jacksonDatabind // for SASL/OAUTHBEARER bearer token parsing
     compileOnly libs.jacksonJDK8Datatypes
