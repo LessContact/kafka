@@ -59,6 +59,7 @@ import io.netty.util.AttributeKey;
 
 public class NettySelector implements Selectable, AutoCloseable {
     private static final AttributeKey<String> CONNECTION_ID_ATTR = AttributeKey.valueOf("kafkaConnectionId");
+    private static final int TRANSFER_BUFFER_SIZE = 8192;
 
     private final Logger log;
     private final int maxReceiveSize;
@@ -539,7 +540,7 @@ public class NettySelector implements Selectable, AutoCloseable {
         public long transferFrom(FileChannel fileChannel, long position, long count) throws IOException {
             ensureOpen();
             long transferred = 0;
-            ByteBuffer scratch = ByteBuffer.allocate((int) Math.min(8192, count));
+            ByteBuffer scratch = ByteBuffer.allocate((int) Math.min(TRANSFER_BUFFER_SIZE, count));
             while (transferred < count) {
                 scratch.clear();
                 int limit = (int) Math.min(scratch.capacity(), count - transferred);
