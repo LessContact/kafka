@@ -37,6 +37,7 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.utils.LogContext;
 import org.apache.kafka.common.utils.Time;
 import org.apache.kafka.common.utils.Timer;
+import org.apache.kafka.common.utils.Utils;
 
 import java.time.Duration;
 import java.util.Collection;
@@ -48,7 +49,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static org.apache.kafka.common.utils.Utils.propsToMap;
 
 /**
  * A client that consumes records from a Kafka cluster.
@@ -568,7 +568,7 @@ public class KafkaConsumer<K, V> implements Consumer<K, V> {
      * @param properties The consumer configuration properties
      */
     public KafkaConsumer(Properties properties) {
-        this(propsToMap(properties), null, null);
+        this(Utils.propsToMap(properties), null, null);
     }
 
     /**
@@ -588,7 +588,7 @@ public class KafkaConsumer<K, V> implements Consumer<K, V> {
     public KafkaConsumer(Properties properties,
                          Deserializer<K> keyDeserializer,
                          Deserializer<V> valueDeserializer) {
-        this(propsToMap(properties), keyDeserializer, valueDeserializer);
+        this(Utils.propsToMap(properties), keyDeserializer, valueDeserializer);
     }
 
     /**
